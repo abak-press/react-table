@@ -1,0 +1,12 @@
+dist/dev.react-table.js
+dist/.gitkeep
+images
+scripts
+index.html
+.idea
+webpack.config.js
+coverage
+.eslintrc
+.babelrc
+/src
+.npmignore
