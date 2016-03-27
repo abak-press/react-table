@@ -1,3 +1,5 @@
+import 'table.scss'
+
 import TBody from 'components/tbody'
 import THead from 'components/thead'
 
@@ -8,9 +10,9 @@ export default class Table extends React.Component {
 
   render() {
     return (
-      <table>
+      <table className={this.props.klass || 'react-table'}>
         <THead cols={this.props.cols} />
-        <TBody rows={this.props.rows} />
+        <TBody cols={this.props.cols} rows={this.props.rows} />
       </table>
     );
   }

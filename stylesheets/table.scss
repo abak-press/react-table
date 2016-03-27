@@ -1,0 +1,30 @@
+.react-table {
+  border-spacing: 0;
+  th {
+    background-color: #eee;
+  }
+  tr {
+    &:nth-child(even) { background-color: #fafafa; }
+  }
+  th {
+    font-weight: normal; text-align: left; border: 1px solid #cfcfcf; margin: 0; border-right-width: 0;
+    padding: 5px;
+    &:last-child { border-right-width: 1px; }
+  }
+  td {
+    text-align: left; border: 1px solid #cfcfcf; margin: 0; border-right-width: 0; padding: 5px;
+    border-top-width: 0;
+    &:last-child { border-right-width: 1px; }
+  }
+
+  .pseudo-link {
+    border-bottom: 1px dashed #1A59C1; color: #1A59C1; cursor: pointer; position: relative; margin-right: 10px;
+    &.sorter {
+      &:after {
+        position: absolute; right: -10px; bottom: -2px; content: '↕';
+      }
+      &.asc:after { content: '↑'; }
+      &.desc:after { content: '↓'; }
+    }
+  }
+}

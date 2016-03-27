@@ -1,9 +1,10 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-   ['dev.react-table']: ['webpack/hot/dev-server', './src/index'],
-   ['react-table']: ['./src/table']
+   ['dev.react-table']: ['webpack/hot/dev-server', './src/app'],
+   ['react-table']: ['./src/index']
   },
   output: {
     library: 'Table',
@@ -14,11 +15,6 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        exclude: /node_modules/
-      },
-      {
         test: /\.jsx?$/,
         loader: 'babel',
         exclude: /node_modules/,
@@ -26,13 +22,26 @@ module.exports = {
           cacheDirectory: true,
           presets: ['es2015', 'react']
         }
+      }, {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'file?name=images/[name]-[hash:6].[ext]'
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+      }, {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css!resolve-url!sass?sourceMap')
       }
     ]
   },
   resolve: {
-    modulesDirectories: ['node_modules', './src'],
-    extensions: ['', '.js', '.jsx']
+    modulesDirectories: ['node_modules', './src', './stylesheets'],
+    extensions: ['', '.js', '.jsx', '.css', '.scss']
   },
+
+  plugins: [
+    new ExtractTextPlugin('dist/[name].css', {allChunks: true})
+  ],
 
   externals: {
     react: {

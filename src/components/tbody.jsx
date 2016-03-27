@@ -1,15 +1,39 @@
+import TD from 'components/td';
+
 export default class TBody extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    let rows = [];
-    this.props.rows.forEach((row, index) => {
+    let
+      rows = [],
+      format = (col, row) => {
+        switch (typeof col.format) {
+          case 'string':
+            return row[col.format];
+            break;
+          case 'function':
+            return col.format(row);
+            break;
+          default:
+            return row[col.format];
+        }
+      },
+      row = (data) => {
+        let records = [];
+        this.props.cols.forEach((col, index) => {
+          records.push(
+            <TD key={index}>{format(col, data)}</TD>
+          );
+        });
+        return records;
+      };
+
+    this.props.rows.forEach((data, index) => {
       rows.push(
         <tr key={index}>
-          <td>{row.name}</td>
-          <td>{row.price}</td>
+          {row(data)}
         </tr>
       );
     });

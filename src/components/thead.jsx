@@ -1,3 +1,5 @@
+import TH from 'components/th';
+
 export default class THead extends React.Component {
   constructor(props) {
     super(props);
@@ -5,8 +7,8 @@ export default class THead extends React.Component {
 
   render() {
     let cols = [];
-    this.props.cols.forEach((title, index) => {
-      cols.push(<th key={index}>{title}</th>);
+    this.props.cols.forEach((col, index) => {
+      cols.push(<TH sorter={col.sorter} key={index}>{col.label}</TH>);
     });
 
     return (
