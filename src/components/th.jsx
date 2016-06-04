@@ -3,32 +3,35 @@ export default class TH extends React.Component {
     super(props);
 
     this.state = {
-      ordered: this.props.sorter ? this.props.sorter.ordered : ''
+      ordered: this.props.sorter ? this.props.sorter.ordered : '',
+      filter: this.props.filter ? this.props.filter.title : ''
     };
-  }
-
-  clickSorter() {
-    this.setState({
-      ordered: this.state.ordered === 'asc' ? 'desc' : 'asc'
-    });
-    this.props.sorter.change && this.props.sorter.change(this.props, this.state);
   }
 
   render() {
     let content = () => {
+      let header = [];
       if (!this.props.sorter) {
-        return this.props.children;
+        header.push(<span key='1' className='title'>{this.props.children}</span>);
       } else {
-        return (
-          <span className={'pseudo-link sorter ' + this.state.ordered} onClick={this.clickSorter.bind(this)}>
+        header.push(
+          <span key='1' className={'title sorter ' + this.state.ordered} onClick={this.props.sorter.change.bind(this)}>
             {this.props.children}
           </span>
         );
       }
+      if (this.props.filter) {
+        header.push(
+          <span key='2' className='title filter' onClick={this.props.filter.show.bind(this)}>
+            {this.state.filter}
+          </span>
+        );
+      }
+      return header;
     };
 
     return (
-      <th>
+      <th className={this.props.klass}>
         {content()}
       </th>
     );

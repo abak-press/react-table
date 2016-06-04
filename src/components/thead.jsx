@@ -8,7 +8,7 @@ export default class THead extends React.Component {
   render() {
     let cols = [];
     this.props.cols.forEach((col, index) => {
-      cols.push(<TH sorter={col.sorter} key={index}>{col.label}</TH>);
+      cols.push(<TH klass={col.klass} filter={col.filter} sorter={col.sorter} key={index}>{col.label}</TH>);
     });
 
     return (
