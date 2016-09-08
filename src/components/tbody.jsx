@@ -24,7 +24,7 @@ export default class TBody extends React.Component {
         let records = [];
         this.props.cols.forEach((col, index) => {
           records.push(
-            <TD key={index}>{format(col, data)}</TD>
+            <TD key={index} klass={col.klass}>{format(col, data)}</TD>
           );
         });
         return records;

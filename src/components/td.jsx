@@ -5,7 +5,7 @@ export default class TD extends React.Component {
 
   render() {
     return (
-      <td>
+      <td className={this.props.klass}>
         {this.props.children}
       </td>
     );
